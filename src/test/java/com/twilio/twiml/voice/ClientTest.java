@@ -10,8 +10,8 @@ package com.twilio.twiml.voice;
 import com.twilio.converter.Promoter;
 import com.twilio.http.HttpMethod;
 import com.twilio.twiml.GenericNode;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.net.URI;
 import java.util.List;
@@ -24,7 +24,7 @@ public class ClientTest {
     public void testEmptyElement() {
         Client elem = new Client.Builder().build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Client/>",
             elem.toXml()
@@ -35,7 +35,7 @@ public class ClientTest {
     public void testEmptyElementUrl() {
         Client elem = new Client.Builder().build();
 
-        Assert.assertEquals("%3C%3Fxml+version%3D%221.0%22+encoding%3D%22UTF-8%22%3F%3E%3CClient%2F%3E", elem.toUrl());
+        Assertions.assertEquals("%3C%3Fxml+version%3D%221.0%22+encoding%3D%22UTF-8%22%3F%3E%3CClient%2F%3E", elem.toUrl());
     }
 
     @Test
@@ -48,7 +48,7 @@ public class ClientTest {
             .statusCallbackMethod(HttpMethod.GET)
             .build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Client method=\"GET\" statusCallback=\"https://example.com\" statusCallbackEvent=\"initiated\" statusCallbackMethod=\"GET\" url=\"https://example.com\">identity</Client>",
             elem.toXml()
@@ -59,7 +59,7 @@ public class ClientTest {
     public void testElementWithExtraAttributes() {
         Client elem = new Client.Builder().option("foo", "bar").option("a", "b").build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Client a=\"b\" foo=\"bar\"/>",
             elem.toXml()
@@ -76,7 +76,7 @@ public class ClientTest {
 
         Client elem = builder.build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Client>" +
                 "<Identity>client_identity</Identity>" +
@@ -94,7 +94,7 @@ public class ClientTest {
 
         Client elem = builder.build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Client>" +
             "Hey no tags!" +
@@ -114,7 +114,7 @@ public class ClientTest {
         builder.addChild(child.build());
         builder.addText("after");
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Client>" +
             "before" +
@@ -134,7 +134,7 @@ public class ClientTest {
         Client.Builder builder = new Client.Builder();
         Client elem = builder.addChild(node).build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Client>" +
             "<genericTag>" +
@@ -153,7 +153,7 @@ public class ClientTest {
         Client.Builder builder = new Client.Builder();
         Client elem = builder.addChild(node).build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Client>" +
             "<genericTag key=\"value\">" +
@@ -174,7 +174,7 @@ public class ClientTest {
             .statusCallbackMethod(HttpMethod.GET)
             .build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             Client.Builder.fromXml("<Client method=\"GET\" statusCallback=\"https://example.com\" statusCallbackEvent=\"initiated\" statusCallbackMethod=\"GET\" url=\"https://example.com\">identity</Client>").build().toXml(),
             elem.toXml()
         );
@@ -190,7 +190,7 @@ public class ClientTest {
 
         final Client elem = builder.build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             Client.Builder.fromXml("<Client>" +
                 "<Identity>client_identity</Identity>" +
                 "<Parameter name=\"name\" value=\"value\"/>" +

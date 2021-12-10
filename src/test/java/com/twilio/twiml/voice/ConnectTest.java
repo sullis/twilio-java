@@ -9,8 +9,8 @@ package com.twilio.twiml.voice;
 
 import com.twilio.http.HttpMethod;
 import com.twilio.twiml.GenericNode;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.net.URI;
 
@@ -22,7 +22,7 @@ public class ConnectTest {
     public void testEmptyElement() {
         Connect elem = new Connect.Builder().build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Connect/>",
             elem.toXml()
@@ -33,14 +33,14 @@ public class ConnectTest {
     public void testEmptyElementUrl() {
         Connect elem = new Connect.Builder().build();
 
-        Assert.assertEquals("%3C%3Fxml+version%3D%221.0%22+encoding%3D%22UTF-8%22%3F%3E%3CConnect%2F%3E", elem.toUrl());
+        Assertions.assertEquals("%3C%3Fxml+version%3D%221.0%22+encoding%3D%22UTF-8%22%3F%3E%3CConnect%2F%3E", elem.toUrl());
     }
 
     @Test
     public void testElementWithParams() {
         Connect elem = new Connect.Builder().action(URI.create("https://example.com")).method(HttpMethod.GET).build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Connect action=\"https://example.com\" method=\"GET\"/>",
             elem.toXml()
@@ -51,7 +51,7 @@ public class ConnectTest {
     public void testElementWithExtraAttributes() {
         Connect elem = new Connect.Builder().option("foo", "bar").option("a", "b").build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Connect a=\"b\" foo=\"bar\"/>",
             elem.toXml()
@@ -84,7 +84,7 @@ public class ConnectTest {
 
         Connect elem = builder.build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Connect>" +
                 "<Room participantIdentity=\"participant_identity\">name</Room>" +
@@ -104,7 +104,7 @@ public class ConnectTest {
 
         Connect elem = builder.build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Connect>" +
             "Hey no tags!" +
@@ -124,7 +124,7 @@ public class ConnectTest {
         builder.addChild(child.build());
         builder.addText("after");
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Connect>" +
             "before" +
@@ -144,7 +144,7 @@ public class ConnectTest {
         Connect.Builder builder = new Connect.Builder();
         Connect elem = builder.addChild(node).build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Connect>" +
             "<genericTag>" +
@@ -163,7 +163,7 @@ public class ConnectTest {
         Connect.Builder builder = new Connect.Builder();
         Connect elem = builder.addChild(node).build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Connect>" +
             "<genericTag key=\"value\">" +
@@ -178,7 +178,7 @@ public class ConnectTest {
     public void testXmlAttributesDeserialization() {
         final Connect elem = new Connect.Builder().action(URI.create("https://example.com")).method(HttpMethod.GET).build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             Connect.Builder.fromXml("<Connect action=\"https://example.com\" method=\"GET\"/>").build().toXml(),
             elem.toXml()
         );
@@ -210,7 +210,7 @@ public class ConnectTest {
 
         final Connect elem = builder.build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             Connect.Builder.fromXml("<Connect>" +
                 "<Room participantIdentity=\"participant_identity\">name</Room>" +
                 "<Autopilot>name</Autopilot>" +

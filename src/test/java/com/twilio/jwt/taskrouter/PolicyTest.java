@@ -1,8 +1,8 @@
 package com.twilio.jwt.taskrouter;
 
 import com.twilio.http.HttpMethod;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -26,7 +26,7 @@ public class PolicyTest {
             .queryFilter(filter)
             .build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 "{\"url\":\"http://localhost\",\"method\":\"GET\",\"query_filter\":{\"foo\":{\"required\":true}},\"post_filter\":{},\"allow\":true}",
                 p.toJson());
     }

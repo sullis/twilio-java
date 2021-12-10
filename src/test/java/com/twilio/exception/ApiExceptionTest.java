@@ -4,11 +4,10 @@ import java.io.ByteArrayInputStream;
 import java.util.Collections;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 @SuppressWarnings("ThrowableInstanceNeverThrown")
 public class ApiExceptionTest {
@@ -30,18 +29,18 @@ public class ApiExceptionTest {
     @Test
     public void twoArgConstructorShouldPreserveMessageAndCause() {
         ApiException error = new ApiException(anyMessage, anyCause);
-        assertEquals("Message", anyMessage, error.getMessage());
-        assertSame("Cause", anyCause, error.getCause());
+        assertEquals(anyMessage, error.getMessage(), "Message");
+        assertSame(anyCause, error.getCause(), "Cause");
     }
 
     @Test
     public void fullConstructorShouldPreserveAllValues() {
         ApiException error = new ApiException(anyMessage, anyErrorCode, anyMoreInfo, anyHttpStatus, anyCause);
-        assertEquals("Message", anyMessage, error.getMessage());
-        assertSame("Cause", anyCause, error.getCause());
-        assertEquals("More info", anyMoreInfo, error.getMoreInfo());
-        assertEquals("Error code", anyErrorCode, error.getCode().intValue());
-        assertEquals("Status code", anyHttpStatus, error.getStatusCode().intValue());
+        assertEquals(anyMessage, error.getMessage(), "Message");
+        assertSame(anyCause, error.getCause(), "Cause");
+        assertEquals(anyMoreInfo, error.getMoreInfo(), "More info");
+        assertEquals(anyErrorCode, error.getCode().intValue(), "Error code");
+        assertEquals(anyHttpStatus, error.getStatusCode().intValue(), "Status code");
     }
 
     @Test
@@ -63,7 +62,7 @@ public class ApiExceptionTest {
         assertEquals(400, (int) error.getStatusCode());
         assertEquals("https://www.twilio.com/docs/errors/20001", error.getMoreInfo());
         assertEquals("Bad request", error.getMessage());
-        assertEquals("details", Collections.singletonMap("foo", "bar"), error.getDetails());
+        assertEquals(Collections.singletonMap("foo", "bar"), error.getDetails(), "details");
     }
 
     @Test

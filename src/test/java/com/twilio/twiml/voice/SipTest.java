@@ -9,8 +9,8 @@ package com.twilio.twiml.voice;
 
 import com.twilio.converter.Promoter;
 import com.twilio.http.HttpMethod;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.net.URI;
 import java.util.List;
@@ -31,7 +31,7 @@ public class SipTest {
             .statusCallbackMethod(HttpMethod.GET)
             .build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Sip method=\"GET\" password=\"password\" statusCallback=\"https://example.com\" statusCallbackEvent=\"initiated\" statusCallbackMethod=\"GET\" url=\"https://example.com\" username=\"username\">https://example.com</Sip>",
             elem.toXml()
@@ -50,7 +50,7 @@ public class SipTest {
             .statusCallbackMethod(HttpMethod.GET)
             .build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             Sip.Builder.fromXml("<Sip method=\"GET\" password=\"password\" statusCallback=\"https://example.com\" statusCallbackEvent=\"initiated\" statusCallbackMethod=\"GET\" url=\"https://example.com\" username=\"username\">https://example.com</Sip>").build().toXml(),
             elem.toXml()
         );

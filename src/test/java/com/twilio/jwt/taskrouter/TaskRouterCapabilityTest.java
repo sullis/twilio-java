@@ -6,9 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Assert;
-import org.junit.Test;
-
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import com.twilio.http.HttpMethod;
 import com.twilio.jwt.Jwt;
 
@@ -40,11 +39,11 @@ public class TaskRouterCapabilityTest {
                 .parseClaimsJws(jwt.toJwt())
                 .getBody();
 
-        Assert.assertEquals(WORKSPACE_SID, claims.get("workspace_sid"));
-        Assert.assertEquals(WORKER_SID, claims.get("channel"));
-        Assert.assertEquals(ACCOUNT_SID, claims.get("account_sid"));
-        Assert.assertEquals(ACCOUNT_SID, claims.getIssuer());
-        Assert.assertTrue(claims.getExpiration().getTime() > new Date().getTime());
+        Assertions.assertEquals(WORKSPACE_SID, claims.get("workspace_sid"));
+        Assertions.assertEquals(WORKER_SID, claims.get("channel"));
+        Assertions.assertEquals(ACCOUNT_SID, claims.get("account_sid"));
+        Assertions.assertEquals(ACCOUNT_SID, claims.getIssuer());
+        Assertions.assertTrue(claims.getExpiration().getTime() > new Date().getTime());
     }
 
     @Test
@@ -83,14 +82,14 @@ public class TaskRouterCapabilityTest {
                         .parseClaimsJws(jwt.toJwt())
                         .getBody();
 
-        Assert.assertEquals(WORKSPACE_SID, claims.get("workspace_sid"));
-        Assert.assertEquals(WORKER_SID, claims.get("channel"));
-        Assert.assertEquals(ACCOUNT_SID, claims.get("account_sid"));
-        Assert.assertEquals(ACCOUNT_SID, claims.getIssuer());
-        Assert.assertTrue(claims.getExpiration().getTime() > new Date().getTime());
+        Assertions.assertEquals(WORKSPACE_SID, claims.get("workspace_sid"));
+        Assertions.assertEquals(WORKER_SID, claims.get("channel"));
+        Assertions.assertEquals(ACCOUNT_SID, claims.get("account_sid"));
+        Assertions.assertEquals(ACCOUNT_SID, claims.getIssuer());
+        Assertions.assertTrue(claims.getExpiration().getTime() > new Date().getTime());
 
         final List<Policy> claimedPolicies = (List<Policy>) claims.get("policies");
         final int connectionPolicies = 2;
-        Assert.assertEquals(policies.size() + connectionPolicies, claimedPolicies.size());
+        Assertions.assertEquals(policies.size() + connectionPolicies, claimedPolicies.size());
     }
 }

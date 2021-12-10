@@ -3,8 +3,8 @@ package com.twilio.jwt.client;
 import com.twilio.jwt.Jwt;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -28,8 +28,8 @@ public class ClientCapabilityTest {
                 .parseClaimsJws(jwt.toJwt())
                 .getBody();
 
-        Assert.assertEquals(ACCOUNT_SID, claims.getIssuer());
-        Assert.assertTrue(claims.getExpiration().getTime() > new Date().getTime());
+        Assertions.assertEquals(ACCOUNT_SID, claims.getIssuer());
+        Assertions.assertTrue(claims.getExpiration().getTime() > new Date().getTime());
     }
 
     @Test
@@ -47,10 +47,10 @@ public class ClientCapabilityTest {
                 .parseClaimsJws(jwt.toJwt())
                 .getBody();
 
-        Assert.assertEquals(ACCOUNT_SID, claims.getIssuer());
-        Assert.assertTrue(claims.getExpiration().getTime() > new Date().getTime());
+        Assertions.assertEquals(ACCOUNT_SID, claims.getIssuer());
+        Assertions.assertTrue(claims.getExpiration().getTime() > new Date().getTime());
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "scope:client:incoming?clientName=incomingClient " +
             "scope:stream:subscribe?path=/2010-04-01/Events " +
             "scope:client:outgoing?appSid=AP123",

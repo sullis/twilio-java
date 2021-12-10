@@ -7,8 +7,8 @@
 
 package com.twilio.twiml.messaging;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test class for {@link Body}
@@ -18,7 +18,7 @@ public class BodyTest {
     public void testElementWithParams() {
         Body elem = new Body.Builder("message").build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Body>message</Body>",
             elem.toXml()
@@ -29,7 +29,7 @@ public class BodyTest {
     public void testXmlAttributesDeserialization() {
         final Body elem = new Body.Builder("message").build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             Body.Builder.fromXml("<Body>message</Body>").build().toXml(),
             elem.toXml()
         );

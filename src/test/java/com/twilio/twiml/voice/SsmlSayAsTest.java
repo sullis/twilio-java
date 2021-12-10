@@ -7,8 +7,8 @@
 
 package com.twilio.twiml.voice;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test class for {@link SsmlSayAs}
@@ -21,7 +21,7 @@ public class SsmlSayAsTest {
             .role(SsmlSayAs.Role.MDY)
             .build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<say-as interpret-as=\"character\" role=\"mdy\">words</say-as>",
             elem.toXml()
@@ -35,7 +35,7 @@ public class SsmlSayAsTest {
             .role(SsmlSayAs.Role.MDY)
             .build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             SsmlSayAs.Builder.fromXml("<say-as interpret-as=\"character\" role=\"mdy\">words</say-as>").build().toXml(),
             elem.toXml()
         );

@@ -2,25 +2,19 @@ package com.twilio.http;
 
 import com.twilio.exception.ApiException;
 import com.twilio.rest.Domains;
+import org.junit.jupiter.api.Test;
+
 import java.time.ZonedDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.LocalDate;
-import org.junit.Test;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
 import static com.twilio.Assert.assertQueryStringsEqual;
 import static com.twilio.Assert.assertUrlsEqual;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class RequestTest {
 
@@ -40,11 +34,13 @@ public class RequestTest {
         assertUrlsEqual(expected, url);
     }
 
-    @Test(expected = ApiException.class)
+    @Test
     public void testConstructURLURISyntaxException() {
-        Request request = new Request(HttpMethod.DELETE, "http://{");
-        request.constructURL();
-        fail("ApiException was expected");
+        assertThrows(ApiException.class, () -> {
+            Request request = new Request(HttpMethod.DELETE, "http://{");
+            request.constructURL();
+            fail("ApiException was expected");
+        });
     }
 
     @Test

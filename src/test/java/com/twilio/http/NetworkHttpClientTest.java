@@ -10,8 +10,8 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -19,9 +19,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Collection;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class NetworkHttpClientTest {
 
@@ -48,7 +46,7 @@ public class NetworkHttpClientTest {
     @Mocked
     private HttpEntity mockEntity;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         new NonStrictExpectations() {{
             mockBuilder.setDefaultHeaders((Collection<Header>) any);
@@ -117,33 +115,37 @@ public class NetworkHttpClientTest {
         assertEquals(resp.getContent(), "frobozz");
     }
 
-    @Test(expected = ApiConnectionException.class)
+    @Test
     public void testMakeRequestIOException() throws IOException {
-        new NonStrictExpectations() {{
-            mockBuilder.setDefaultHeaders((Collection<Header>) any);
-            result = mockBuilder;
+        assertThrows(ApiConnectionException.class, () -> {
+            new NonStrictExpectations() {
+                {
+                    mockBuilder.setDefaultHeaders((Collection<Header>) any);
+                    result = mockBuilder;
 
-            mockBuilder.build();
-            result = mockClient;
+                    mockBuilder.build();
+                    result = mockClient;
 
-            mockRequest.getMethod();
-            result = HttpMethod.GET;
+                    mockRequest.getMethod();
+                    result = HttpMethod.GET;
 
-            mockRequest.constructURL();
-            result = mockUrl;
+                    mockRequest.constructURL();
+                    result = mockUrl;
 
-            mockRequest.requiresAuthentication();
-            result = true;
+                    mockRequest.requiresAuthentication();
+                    result = true;
 
-            mockRequest.getAuthString();
-            result = "foo:bar";
+                    mockRequest.getAuthString();
+                    result = "foo:bar";
 
-            mockClient.execute((HttpUriRequest) any);
-            result = new ApiConnectionException("foo");
-        }};
+                    mockClient.execute((HttpUriRequest) any);
+                    result = new ApiConnectionException("foo");
+                }
+            };
 
-        client.makeRequest(mockRequest);
-        fail("ApiConnectionException was expected");
+            client.makeRequest(mockRequest);
+            fail("ApiConnectionException was expected");
+        });
     }
 
     @Test

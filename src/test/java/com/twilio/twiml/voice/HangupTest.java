@@ -8,8 +8,8 @@
 package com.twilio.twiml.voice;
 
 import com.twilio.twiml.GenericNode;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test class for {@link Hangup}
@@ -19,7 +19,7 @@ public class HangupTest {
     public void testEmptyElement() {
         Hangup elem = new Hangup.Builder().build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Hangup/>",
             elem.toXml()
@@ -30,14 +30,14 @@ public class HangupTest {
     public void testEmptyElementUrl() {
         Hangup elem = new Hangup.Builder().build();
 
-        Assert.assertEquals("%3C%3Fxml+version%3D%221.0%22+encoding%3D%22UTF-8%22%3F%3E%3CHangup%2F%3E", elem.toUrl());
+        Assertions.assertEquals("%3C%3Fxml+version%3D%221.0%22+encoding%3D%22UTF-8%22%3F%3E%3CHangup%2F%3E", elem.toUrl());
     }
 
     @Test
     public void testElementWithExtraAttributes() {
         Hangup elem = new Hangup.Builder().option("foo", "bar").option("a", "b").build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Hangup a=\"b\" foo=\"bar\"/>",
             elem.toXml()
@@ -52,7 +52,7 @@ public class HangupTest {
 
         Hangup elem = builder.build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Hangup>" +
             "Hey no tags!" +
@@ -72,7 +72,7 @@ public class HangupTest {
         builder.addChild(child.build());
         builder.addText("after");
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Hangup>" +
             "before" +
@@ -92,7 +92,7 @@ public class HangupTest {
         Hangup.Builder builder = new Hangup.Builder();
         Hangup elem = builder.addChild(node).build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Hangup>" +
             "<genericTag>" +
@@ -107,7 +107,7 @@ public class HangupTest {
     public void testXmlAttributesDeserialization() {
         final Hangup elem = new Hangup.Builder().build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             Hangup.Builder.fromXml("<Hangup/>").build().toXml(),
             elem.toXml()
         );

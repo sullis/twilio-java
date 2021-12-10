@@ -7,8 +7,8 @@
 
 package com.twilio.twiml.voice;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test class for {@link SsmlSub}
@@ -18,7 +18,7 @@ public class SsmlSubTest {
     public void testElementWithParams() {
         SsmlSub elem = new SsmlSub.Builder("words").alias("alias").build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<sub alias=\"alias\">words</sub>",
             elem.toXml()
@@ -29,7 +29,7 @@ public class SsmlSubTest {
     public void testXmlAttributesDeserialization() {
         final SsmlSub elem = new SsmlSub.Builder("words").alias("alias").build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             SsmlSub.Builder.fromXml("<sub alias=\"alias\">words</sub>").build().toXml(),
             elem.toXml()
         );

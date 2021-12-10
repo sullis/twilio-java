@@ -1,7 +1,7 @@
 package com.twilio.type;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
@@ -19,9 +19,9 @@ public class FeedbackIssueTest extends TypeTest {
             "}";
 
         FeedbackIssue issue = fromJson(json, FeedbackIssue.class);
-        Assert.assertEquals(5, issue.getCount());
-        Assert.assertEquals("issue", issue.getDescription());
-        Assert.assertEquals("99.9", issue.getPercentageOfTotalCalls());
+        Assertions.assertEquals(5, issue.getCount());
+        Assertions.assertEquals("issue", issue.getDescription());
+        Assertions.assertEquals("99.9", issue.getPercentageOfTotalCalls());
     }
 
 }

@@ -10,9 +10,9 @@ import org.apache.http.*;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicHttpRequest;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -49,7 +49,7 @@ public class ValidationTokenTest {
     @Mocked
     private HttpEntity entity;
 
-    @Before
+    @BeforeEach
     public void setup() throws Exception {
         headers = new Header[2];
         headers[0] = new BasicHeader("host", "api.twilio.com");
@@ -80,8 +80,8 @@ public class ValidationTokenTest {
 
 
         this.validateToken(claims);
-        Assert.assertEquals("authorization;host", claims.get("hrh"));
-        Assert.assertEquals("4dc9b67bed579647914587b0e22a1c65c1641d8674797cd82de65e766cce5f80", claims.get("rqh"));
+        Assertions.assertEquals("authorization;host", claims.get("hrh"));
+        Assertions.assertEquals("4dc9b67bed579647914587b0e22a1c65c1641d8674797cd82de65e766cce5f80", claims.get("rqh"));
     }
 
     @Test
@@ -106,8 +106,8 @@ public class ValidationTokenTest {
 
 
         this.validateToken(claims);
-        Assert.assertEquals("authorization;host", claims.get("hrh"));
-        Assert.assertEquals("712fbbec9dcb4fe58ed8caecf925d2fe10889f5d3f4b48e748157a4a1113697d", claims.get("rqh"));
+        Assertions.assertEquals("authorization;host", claims.get("hrh"));
+        Assertions.assertEquals("712fbbec9dcb4fe58ed8caecf925d2fe10889f5d3f4b48e748157a4a1113697d", claims.get("rqh"));
     }
 
     @Test
@@ -138,8 +138,8 @@ public class ValidationTokenTest {
 
 
         this.validateToken(claims);
-        Assert.assertEquals("authorization;host", claims.get("hrh"));
-        Assert.assertEquals("bd792c967c20d546c738b94068f5f72758a10d26c12979677501e1eefe58c65a", claims.get("rqh"));
+        Assertions.assertEquals("authorization;host", claims.get("hrh"));
+        Assertions.assertEquals("bd792c967c20d546c738b94068f5f72758a10d26c12979677501e1eefe58c65a", claims.get("rqh"));
     }
 
     @Test
@@ -165,8 +165,8 @@ public class ValidationTokenTest {
 
 
         this.validateToken(claims);
-        Assert.assertEquals("authorization;host", claims.get("hrh"));
-        Assert.assertEquals("4b3d2666845a38f00259a5231a08765bb2d12564bc4469fd5b2816204c588967", claims.get("rqh"));
+        Assertions.assertEquals("authorization;host", claims.get("hrh"));
+        Assertions.assertEquals("4b3d2666845a38f00259a5231a08765bb2d12564bc4469fd5b2816204c588967", claims.get("rqh"));
     }
 
     @Test
@@ -184,7 +184,7 @@ public class ValidationTokenTest {
                         i.process(getBasicRequest(), new HttpClientContext());
                     } catch (Exception e) {
                         e.printStackTrace();
-                        Assert.fail(e.getMessage());
+                        Assertions.fail(e.getMessage());
                     }
                 }
             }));
@@ -204,14 +204,14 @@ public class ValidationTokenTest {
     }
 
     private void validateToken(Claims claims) {
-        Assert.assertEquals(SIGNING_KEY_SID, claims.getIssuer());
-        Assert.assertEquals(ACCOUNT_SID, claims.getSubject());
+        Assertions.assertEquals(SIGNING_KEY_SID, claims.getIssuer());
+        Assertions.assertEquals(ACCOUNT_SID, claims.getSubject());
 
-        Assert.assertNotNull(claims.getExpiration());
-        Assert.assertNotNull(claims.get("hrh"));
-        Assert.assertNotNull(claims.get("rqh"));
+        Assertions.assertNotNull(claims.getExpiration());
+        Assertions.assertNotNull(claims.get("hrh"));
+        Assertions.assertNotNull(claims.get("rqh"));
 
-        Assert.assertTrue(claims.getExpiration().getTime() > new Date().getTime());
+        Assertions.assertTrue(claims.getExpiration().getTime() > new Date().getTime());
     }
 
 }

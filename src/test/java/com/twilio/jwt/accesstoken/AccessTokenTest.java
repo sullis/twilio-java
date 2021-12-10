@@ -4,8 +4,8 @@ import com.twilio.jwt.Jwt;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwsHeader;
 import io.jsonwebtoken.Jwts;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -21,15 +21,15 @@ public class AccessTokenTest {
     private static final String SECRET = "secretsecretsecretsecretsecret00";
 
     private void validateToken(Claims claims) {
-        Assert.assertEquals(SIGNING_KEY_SID, claims.getIssuer());
-        Assert.assertEquals(ACCOUNT_SID, claims.getSubject());
+        Assertions.assertEquals(SIGNING_KEY_SID, claims.getIssuer());
+        Assertions.assertEquals(ACCOUNT_SID, claims.getSubject());
 
-        Assert.assertNotNull(claims.getExpiration());
-        Assert.assertNotNull(claims.getId());
-        Assert.assertNotNull(claims.get("grants"));
+        Assertions.assertNotNull(claims.getExpiration());
+        Assertions.assertNotNull(claims.getId());
+        Assertions.assertNotNull(claims.get("grants"));
 
-        Assert.assertTrue(claims.getId().startsWith(claims.getIssuer() + "-"));
-        Assert.assertTrue(claims.getExpiration().getTime() > new Date().getTime());
+        Assertions.assertTrue(claims.getId().startsWith(claims.getIssuer() + "-"));
+        Assertions.assertTrue(claims.getExpiration().getTime() > new Date().getTime());
     }
 
     private Claims getClaimFromJwtToken(Jwt token) {
@@ -56,17 +56,17 @@ public class AccessTokenTest {
 
         validateToken(claims);
         Map<String, Object> decodedGrants = (Map<String, Object>) claims.get("grants");
-        Assert.assertEquals(1, decodedGrants.size());
+        Assertions.assertEquals(1, decodedGrants.size());
 
         Map<String, Object> pvgGrant = (Map<String, Object>) decodedGrants.get("voice");
 
         Map<String, Object> incoming = (Map<String, Object>) pvgGrant.get("incoming");
-        Assert.assertEquals(allow, incoming.get("allow"));
+        Assertions.assertEquals(allow, incoming.get("allow"));
 
         Map<String, Object> outgoing = (Map<String, Object>) pvgGrant.get("outgoing");
         Map<String, Object> outgoingParams = (Map<String, Object>) outgoing.get("params");
-        Assert.assertEquals("AP123", outgoing.get("application_sid"));
-        Assert.assertEquals("bar", outgoingParams.get("foo"));
+        Assertions.assertEquals("AP123", outgoing.get("application_sid"));
+        Assertions.assertEquals("bar", outgoingParams.get("foo"));
     }
 
     @Test
@@ -91,7 +91,7 @@ public class AccessTokenTest {
         Claims claims = getClaimFromJwtToken(token);
 
         validateToken(claims);
-        Assert.assertTrue(claims.getNotBefore().getTime() <= new Date().getTime());
+        Assertions.assertTrue(claims.getNotBefore().getTime() <= new Date().getTime());
     }
 
     @Test
@@ -105,7 +105,7 @@ public class AccessTokenTest {
             .parseClaimsJws(token.toJwt())
             .getHeader();
 
-        Assert.assertEquals("foo", header.get("twr"));
+        Assertions.assertEquals("foo", header.get("twr"));
     }
 
     @Test
@@ -117,7 +117,7 @@ public class AccessTokenTest {
             .parseClaimsJws(token.toJwt())
             .getHeader();
 
-        Assert.assertEquals(null, header.get("twr"));
+        Assertions.assertEquals(null, header.get("twr"));
     }
 
     @Test
@@ -133,10 +133,10 @@ public class AccessTokenTest {
         validateToken(claims);
 
         Map<String, Object> decodedGrants = (Map<String, Object>) claims.get("grants");
-        Assert.assertEquals(1, decodedGrants.size());
+        Assertions.assertEquals(1, decodedGrants.size());
 
         Map<String, Object> grant = (Map<String, Object>) decodedGrants.get("video");
-        Assert.assertEquals("RM123", grant.get("room"));
+        Assertions.assertEquals("RM123", grant.get("room"));
     }
 
     @Test
@@ -156,13 +156,13 @@ public class AccessTokenTest {
         validateToken(claims);
 
         Map<String, Object> decodedGrants = (Map<String, Object>) claims.get("grants");
-        Assert.assertEquals(1, decodedGrants.size());
+        Assertions.assertEquals(1, decodedGrants.size());
 
         Map<String, Object> grant = (Map<String, Object>) decodedGrants.get("chat");
-        Assert.assertEquals("RL123", grant.get("deployment_role_sid"));
-        Assert.assertEquals("foobar", grant.get("endpoint_id"));
-        Assert.assertEquals("CR123", grant.get("push_credential_sid"));
-        Assert.assertEquals("IS123", grant.get("service_sid"));
+        Assertions.assertEquals("RL123", grant.get("deployment_role_sid"));
+        Assertions.assertEquals("foobar", grant.get("endpoint_id"));
+        Assertions.assertEquals("CR123", grant.get("push_credential_sid"));
+        Assertions.assertEquals("IS123", grant.get("service_sid"));
     }
 
     @Test
@@ -180,11 +180,11 @@ public class AccessTokenTest {
         validateToken(claims);
 
         Map<String, Object> decodedGrants = (Map<String, Object>) claims.get("grants");
-        Assert.assertEquals(1, decodedGrants.size());
+        Assertions.assertEquals(1, decodedGrants.size());
 
         Map<String, Object> grant = (Map<String, Object>) decodedGrants.get("data_sync");
-        Assert.assertEquals("foobar", grant.get("endpoint_id"));
-        Assert.assertEquals("IS123", grant.get("service_sid"));
+        Assertions.assertEquals("foobar", grant.get("endpoint_id"));
+        Assertions.assertEquals("IS123", grant.get("service_sid"));
     }
 
     @Test
@@ -205,12 +205,12 @@ public class AccessTokenTest {
         validateToken(claims);
 
         Map<String, Object> decodedGrants = (Map<String, Object>) claims.get("grants");
-        Assert.assertEquals(1, decodedGrants.size());
+        Assertions.assertEquals(1, decodedGrants.size());
 
         Map<String, Object> grant = (Map<String, Object>) decodedGrants.get("player");
-        Assert.assertNull(grant.get("requestCredentials"));
-        Assert.assertEquals("https://000.us-east-1.playback.live-video.net/api/video/v1/us-east-000.channel.000?token=xxxxx", grant.get("playbackUrl"));
-        Assert.assertEquals("VJXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", grant.get("playerStreamerSid"));
+        Assertions.assertNull(grant.get("requestCredentials"));
+        Assertions.assertEquals("https://000.us-east-1.playback.live-video.net/api/video/v1/us-east-000.channel.000?token=xxxxx", grant.get("playbackUrl"));
+        Assertions.assertEquals("VJXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", grant.get("playerStreamerSid"));
     }
 
     @Test
@@ -230,12 +230,12 @@ public class AccessTokenTest {
         validateToken(claims);
 
         Map<String, Object> decodedGrants = (Map<String, Object>) claims.get("grants");
-        Assert.assertEquals(1, decodedGrants.size());
+        Assertions.assertEquals(1, decodedGrants.size());
 
         Map<String, Object> grant = (Map<String, Object>) decodedGrants.get("task_router");
-        Assert.assertEquals("WS123", grant.get("workspace_sid"));
-        Assert.assertEquals("WK123", grant.get("worker_sid"));
-        Assert.assertEquals("worker", grant.get("role"));
+        Assertions.assertEquals("WS123", grant.get("workspace_sid"));
+        Assertions.assertEquals("WK123", grant.get("worker_sid"));
+        Assertions.assertEquals("worker", grant.get("role"));
     }
 
     @Test
@@ -261,19 +261,19 @@ public class AccessTokenTest {
 
         validateToken(claims);
         Map<String, Object> decodedGrants = (Map<String, Object>) claims.get("grants");
-        Assert.assertEquals(1, decodedGrants.size());
+        Assertions.assertEquals(1, decodedGrants.size());
 
         Map<String, Object> pvgGrant = (Map<String, Object>) decodedGrants.get("voice");
 
-        Assert.assertEquals(null, pvgGrant.get("incoming"));
+        Assertions.assertEquals(null, pvgGrant.get("incoming"));
 
         Map<String, Object> outgoing = (Map<String, Object>) pvgGrant.get("outgoing");
         Map<String, Object> outgoingParams = (Map<String, Object>) outgoing.get("params");
-        Assert.assertEquals("AP123", outgoing.get("application_sid"));
-        Assert.assertEquals("bar", outgoingParams.get("foo"));
+        Assertions.assertEquals("AP123", outgoing.get("application_sid"));
+        Assertions.assertEquals("bar", outgoingParams.get("foo"));
     }
 
-    @Test()
+    @Test
     public void testNullValues() {
         ChatGrant cg = new ChatGrant().setDeploymentRoleSid("RL123");
         Jwt token =
@@ -288,7 +288,7 @@ public class AccessTokenTest {
         Map<String, Object> decodedGrants = (Map<String, Object>) claims.get("grants");
         Map<String, Object> grant = (Map<String, Object>) decodedGrants.get("chat");
 
-        Assert.assertEquals("RL123", grant.get("deployment_role_sid"));
-        Assert.assertFalse(grant.containsKey("endpoint_id"));
+        Assertions.assertEquals("RL123", grant.get("deployment_role_sid"));
+        Assertions.assertFalse(grant.containsKey("endpoint_id"));
     }
 }

@@ -1,12 +1,12 @@
 package com.twilio.type;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.Arrays;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class RecordingRuleTest extends TypeTest {
     @Test
@@ -37,10 +37,10 @@ public class RecordingRuleTest extends TypeTest {
                 "}";
 
         RecordingRule r = fromJson(json, RecordingRule.class);
-        Assert.assertEquals(RecordingRule.Type.INCLUDE, r.getType());
-        Assert.assertEquals(true, r.getAll());
+        Assertions.assertEquals(RecordingRule.Type.INCLUDE, r.getType());
+        Assertions.assertEquals(true, r.getAll());
 
-        Assert.assertTrue(convertsToAndFromJson(r, RecordingRule.class));
+        Assertions.assertTrue(convertsToAndFromJson(r, RecordingRule.class));
     }
 
     @Test
@@ -53,12 +53,12 @@ public class RecordingRuleTest extends TypeTest {
                 "}";
 
         RecordingRule r = fromJson(json, RecordingRule.class);
-        Assert.assertEquals(RecordingRule.Type.EXCLUDE, r.getType());
-        Assert.assertEquals(RecordingRule.Kind.VIDEO, r.getKind());
-        Assert.assertEquals("alice", r.getPublisher());
-        Assert.assertNull(r.getAll());
+        Assertions.assertEquals(RecordingRule.Type.EXCLUDE, r.getType());
+        Assertions.assertEquals(RecordingRule.Kind.VIDEO, r.getKind());
+        Assertions.assertEquals("alice", r.getPublisher());
+        Assertions.assertNull(r.getAll());
 
-        Assert.assertTrue(convertsToAndFromJson(r, RecordingRule.class));
+        Assertions.assertTrue(convertsToAndFromJson(r, RecordingRule.class));
     }
 
     @Test
@@ -77,6 +77,6 @@ public class RecordingRuleTest extends TypeTest {
                 allAudio, presenterVideo
         ));
 
-        Assert.assertTrue(convertsToAndFromJson(update, RecordingRulesUpdate.class));
+        Assertions.assertTrue(convertsToAndFromJson(update, RecordingRulesUpdate.class));
     }
 }

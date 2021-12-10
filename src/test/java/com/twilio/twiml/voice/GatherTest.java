@@ -10,8 +10,8 @@ package com.twilio.twiml.voice;
 import com.twilio.converter.Promoter;
 import com.twilio.http.HttpMethod;
 import com.twilio.twiml.GenericNode;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.net.URI;
 import java.util.List;
@@ -24,7 +24,7 @@ public class GatherTest {
     public void testEmptyElement() {
         Gather elem = new Gather.Builder().build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Gather/>",
             elem.toXml()
@@ -35,7 +35,7 @@ public class GatherTest {
     public void testEmptyElementUrl() {
         Gather elem = new Gather.Builder().build();
 
-        Assert.assertEquals("%3C%3Fxml+version%3D%221.0%22+encoding%3D%22UTF-8%22%3F%3E%3CGather%2F%3E", elem.toUrl());
+        Assertions.assertEquals("%3C%3Fxml+version%3D%221.0%22+encoding%3D%22UTF-8%22%3F%3E%3CGather%2F%3E", elem.toUrl());
     }
 
     @Test
@@ -61,7 +61,7 @@ public class GatherTest {
             .enhanced(true)
             .build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Gather action=\"https://example.com\" actionOnEmptyResult=\"true\" bargeIn=\"true\" debug=\"true\" enhanced=\"true\" finishOnKey=\"finish_on_key\" hints=\"hints\" input=\"dtmf\" language=\"af-ZA\" maxSpeechTime=\"1\" method=\"GET\" numDigits=\"1\" partialResultCallback=\"https://example.com\" partialResultCallbackMethod=\"GET\" profanityFilter=\"true\" speechModel=\"default\" speechTimeout=\"speech_timeout\" timeout=\"1\"/>",
             elem.toXml()
@@ -72,7 +72,7 @@ public class GatherTest {
     public void testElementWithExtraAttributes() {
         Gather elem = new Gather.Builder().option("foo", "bar").option("a", "b").build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Gather a=\"b\" foo=\"bar\"/>",
             elem.toXml()
@@ -91,7 +91,7 @@ public class GatherTest {
 
         Gather elem = builder.build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Gather>" +
                 "<Say language=\"arb\" loop=\"1\" voice=\"man\">message</Say>" +
@@ -110,7 +110,7 @@ public class GatherTest {
 
         Gather elem = builder.build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Gather>" +
             "Hey no tags!" +
@@ -130,7 +130,7 @@ public class GatherTest {
         builder.addChild(child.build());
         builder.addText("after");
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Gather>" +
             "before" +
@@ -150,7 +150,7 @@ public class GatherTest {
         Gather.Builder builder = new Gather.Builder();
         Gather elem = builder.addChild(node).build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Gather>" +
             "<genericTag>" +
@@ -169,7 +169,7 @@ public class GatherTest {
         Gather.Builder builder = new Gather.Builder();
         Gather elem = builder.addChild(node).build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Gather>" +
             "<genericTag key=\"value\">" +
@@ -203,7 +203,7 @@ public class GatherTest {
             .enhanced(true)
             .build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             Gather.Builder.fromXml("<Gather action=\"https://example.com\" actionOnEmptyResult=\"true\" bargeIn=\"true\" debug=\"true\" enhanced=\"true\" finishOnKey=\"finish_on_key\" hints=\"hints\" input=\"dtmf\" language=\"af-ZA\" maxSpeechTime=\"1\" method=\"GET\" numDigits=\"1\" partialResultCallback=\"https://example.com\" partialResultCallbackMethod=\"GET\" profanityFilter=\"true\" speechModel=\"default\" speechTimeout=\"speech_timeout\" timeout=\"1\"/>").build().toXml(),
             elem.toXml()
         );
@@ -221,7 +221,7 @@ public class GatherTest {
 
         final Gather elem = builder.build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             Gather.Builder.fromXml("<Gather>" +
                 "<Say language=\"arb\" loop=\"1\" voice=\"man\">message</Say>" +
                 "<Pause length=\"1\"/>" +

@@ -19,19 +19,20 @@ import com.twilio.http.TwilioRestClient;
 import com.twilio.rest.Domains;
 import mockit.Mocked;
 import mockit.NonStrictExpectations;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.net.URI;
 
 import static com.twilio.TwilioTest.serialize;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class SigningKeyTest {
     @Mocked
     private TwilioRestClient twilioRestClient;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         Twilio.init("AC123", "AUTH TOKEN");
     }

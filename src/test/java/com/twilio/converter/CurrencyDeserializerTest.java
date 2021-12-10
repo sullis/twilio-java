@@ -4,11 +4,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.Currency;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Test class for {@link CurrencyDeserializer}.
@@ -21,15 +23,17 @@ public class CurrencyDeserializerTest {
         ObjectMapper mapper = new ObjectMapper();
 
         Container c = Container.fromJson(json, mapper);
-        Assert.assertEquals("USD", c.currency.getCurrencyCode());
+        Assertions.assertEquals("USD", c.currency.getCurrencyCode());
     }
 
-    @Test(expected = JsonMappingException.class)
+    @Test
     public void testInvalidCurrency() throws IOException {
-        String json = "{ \"currency\": \"poo\" }";
-        ObjectMapper mapper = new ObjectMapper();
+        assertThrows(JsonMappingException.class, () -> {
+            String json = "{ \"currency\": \"poo\" }";
+            ObjectMapper mapper = new ObjectMapper();
 
-        Container.fromJson(json, mapper);
+            Container.fromJson(json, mapper);
+        });
     }
 
     private static class Container {

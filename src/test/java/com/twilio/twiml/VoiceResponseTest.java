@@ -29,8 +29,8 @@ import com.twilio.twiml.voice.Say;
 import com.twilio.twiml.voice.Sms;
 import com.twilio.twiml.voice.Start;
 import com.twilio.twiml.voice.Stop;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.net.URI;
 import java.util.List;
@@ -43,7 +43,7 @@ public class VoiceResponseTest {
     public void testEmptyElement() {
         VoiceResponse elem = new VoiceResponse.Builder().build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Response/>",
             elem.toXml()
@@ -54,14 +54,14 @@ public class VoiceResponseTest {
     public void testEmptyElementUrl() {
         VoiceResponse elem = new VoiceResponse.Builder().build();
 
-        Assert.assertEquals("%3C%3Fxml+version%3D%221.0%22+encoding%3D%22UTF-8%22%3F%3E%3CResponse%2F%3E", elem.toUrl());
+        Assertions.assertEquals("%3C%3Fxml+version%3D%221.0%22+encoding%3D%22UTF-8%22%3F%3E%3CResponse%2F%3E", elem.toUrl());
     }
 
     @Test
     public void testElementWithExtraAttributes() {
         VoiceResponse elem = new VoiceResponse.Builder().option("foo", "bar").option("a", "b").build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Response a=\"b\" foo=\"bar\"/>",
             elem.toXml()
@@ -205,7 +205,7 @@ public class VoiceResponseTest {
 
         VoiceResponse elem = builder.build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Response>" +
                 "<Connect action=\"https://example.com\" method=\"GET\"/>" +
@@ -241,7 +241,7 @@ public class VoiceResponseTest {
 
         VoiceResponse elem = builder.build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Response>" +
             "Hey no tags!" +
@@ -261,7 +261,7 @@ public class VoiceResponseTest {
         builder.addChild(child.build());
         builder.addText("after");
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Response>" +
             "before" +
@@ -281,7 +281,7 @@ public class VoiceResponseTest {
         VoiceResponse.Builder builder = new VoiceResponse.Builder();
         VoiceResponse elem = builder.addChild(node).build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Response>" +
             "<genericTag>" +
@@ -300,7 +300,7 @@ public class VoiceResponseTest {
         VoiceResponse.Builder builder = new VoiceResponse.Builder();
         VoiceResponse elem = builder.addChild(node).build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Response>" +
             "<genericTag key=\"value\">" +
@@ -315,7 +315,7 @@ public class VoiceResponseTest {
     public void testXmlAttributesDeserialization() {
         final VoiceResponse elem = new VoiceResponse.Builder().build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             VoiceResponse.Builder.fromXml("<Response/>").build().toXml(),
             elem.toXml()
         );
@@ -458,7 +458,7 @@ public class VoiceResponseTest {
 
         final VoiceResponse elem = builder.build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             VoiceResponse.Builder.fromXml("<Response>" +
                 "<Connect action=\"https://example.com\" method=\"GET\"/>" +
                 "<Dial action=\"https://example.com\" answerOnBridge=\"true\" callerId=\"caller_id\" hangupOnStar=\"true\" method=\"GET\" record=\"do-not-record\" recordingStatusCallback=\"https://example.com\" recordingStatusCallbackEvent=\"in-progress\" recordingStatusCallbackMethod=\"GET\" recordingTrack=\"both\" referMethod=\"GET\" referUrl=\"https://example.com\" ringTone=\"at\" sequential=\"true\" timeLimit=\"1\" timeout=\"1\" trim=\"trim-silence\">number</Dial>" +

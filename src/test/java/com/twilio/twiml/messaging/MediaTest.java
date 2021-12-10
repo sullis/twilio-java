@@ -7,8 +7,8 @@
 
 package com.twilio.twiml.messaging;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.net.URI;
 
@@ -20,7 +20,7 @@ public class MediaTest {
     public void testElementWithParams() {
         Media elem = new Media.Builder(URI.create("https://example.com")).build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Media>https://example.com</Media>",
             elem.toXml()
@@ -31,7 +31,7 @@ public class MediaTest {
     public void testXmlAttributesDeserialization() {
         final Media elem = new Media.Builder(URI.create("https://example.com")).build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             Media.Builder.fromXml("<Media>https://example.com</Media>").build().toXml(),
             elem.toXml()
         );

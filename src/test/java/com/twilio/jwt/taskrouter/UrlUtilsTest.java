@@ -1,7 +1,7 @@
 package com.twilio.jwt.taskrouter;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test class for {@link UrlUtils}.
@@ -17,7 +17,7 @@ public class UrlUtilsTest {
 
     @Test
     public void testWorkspaces() {
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "https://taskrouter.twilio.com/v1/Workspaces",
             UrlUtils.workspaces()
         );
@@ -25,7 +25,7 @@ public class UrlUtilsTest {
 
     @Test
     public void testAllWorkspaces() {
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "https://taskrouter.twilio.com/v1/Workspaces/**",
             UrlUtils.allWorkspaces()
         );
@@ -33,7 +33,7 @@ public class UrlUtilsTest {
 
     @Test
     public void testWorkspace() {
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "https://taskrouter.twilio.com/v1/Workspaces/WS123",
             UrlUtils.workspace(WORKSPACE_SID)
         );
@@ -41,7 +41,7 @@ public class UrlUtilsTest {
 
     @Test
     public void testTaskQueues() {
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "https://taskrouter.twilio.com/v1/Workspaces/WS123/TaskQueues",
             UrlUtils.taskQueues(WORKSPACE_SID)
         );
@@ -49,7 +49,7 @@ public class UrlUtilsTest {
 
     @Test
     public void testAllTaskQueues() {
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "https://taskrouter.twilio.com/v1/Workspaces/WS123/TaskQueues/**",
             UrlUtils.allTaskQueues(WORKSPACE_SID)
         );
@@ -57,7 +57,7 @@ public class UrlUtilsTest {
 
     @Test
     public void testTaskQueue() {
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "https://taskrouter.twilio.com/v1/Workspaces/WS123/TaskQueues/TQ123",
             UrlUtils.taskQueue(WORKSPACE_SID, TASK_QUEUE_SID)
         );
@@ -65,7 +65,7 @@ public class UrlUtilsTest {
 
     @Test
     public void testTasks() {
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "https://taskrouter.twilio.com/v1/Workspaces/WS123/Tasks",
             UrlUtils.tasks(WORKSPACE_SID)
         );
@@ -73,7 +73,7 @@ public class UrlUtilsTest {
 
     @Test
     public void testAllTasks() {
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "https://taskrouter.twilio.com/v1/Workspaces/WS123/Tasks/**",
             UrlUtils.allTasks(WORKSPACE_SID)
         );
@@ -81,7 +81,7 @@ public class UrlUtilsTest {
 
     @Test
     public void testTask() {
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "https://taskrouter.twilio.com/v1/Workspaces/WS123/Tasks/TK123",
             UrlUtils.task(WORKSPACE_SID, TASK_SID)
         );
@@ -89,7 +89,7 @@ public class UrlUtilsTest {
 
     @Test
     public void testActivities() {
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "https://taskrouter.twilio.com/v1/Workspaces/WS123/Activities",
             UrlUtils.activities(WORKSPACE_SID)
         );
@@ -97,7 +97,7 @@ public class UrlUtilsTest {
 
     @Test
     public void testAllActivities() {
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "https://taskrouter.twilio.com/v1/Workspaces/WS123/Activities/**",
             UrlUtils.allActivities(WORKSPACE_SID)
         );
@@ -105,7 +105,7 @@ public class UrlUtilsTest {
 
     @Test
     public void testActivity() {
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "https://taskrouter.twilio.com/v1/Workspaces/WS123/Activities/AC123",
             UrlUtils.activity(WORKSPACE_SID, ACTIVITY_SID)
         );
@@ -113,7 +113,7 @@ public class UrlUtilsTest {
 
     @Test
     public void testWorkers() {
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "https://taskrouter.twilio.com/v1/Workspaces/WS123/Workers",
             UrlUtils.workers(WORKSPACE_SID)
         );
@@ -121,7 +121,7 @@ public class UrlUtilsTest {
 
     @Test
     public void testAllWorkers() {
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "https://taskrouter.twilio.com/v1/Workspaces/WS123/Workers/**",
             UrlUtils.allWorkers(WORKSPACE_SID)
         );
@@ -129,7 +129,7 @@ public class UrlUtilsTest {
 
     @Test
     public void testWorker() {
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "https://taskrouter.twilio.com/v1/Workspaces/WS123/Workers/WK123",
             UrlUtils.worker(WORKSPACE_SID, WORKER_SID)
         );
@@ -137,7 +137,7 @@ public class UrlUtilsTest {
 
     @Test
     public void testReservations() {
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "https://taskrouter.twilio.com/v1/Workspaces/WS123/Workers/WK123/Reservations",
             UrlUtils.reservations(WORKSPACE_SID, WORKER_SID)
         );
@@ -145,7 +145,7 @@ public class UrlUtilsTest {
 
     @Test
     public void testAllReservations() {
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "https://taskrouter.twilio.com/v1/Workspaces/WS123/Workers/WK123/Reservations/**",
             UrlUtils.allReservations(WORKSPACE_SID, WORKER_SID)
         );
@@ -153,7 +153,7 @@ public class UrlUtilsTest {
 
     @Test
     public void testReservation() {
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "https://taskrouter.twilio.com/v1/Workspaces/WS123/Workers/WK123/Reservations/WR123",
             UrlUtils.reservation(WORKSPACE_SID, WORKER_SID, RESERVATION_SID)
         );

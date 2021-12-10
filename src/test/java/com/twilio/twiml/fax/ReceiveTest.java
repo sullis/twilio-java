@@ -9,8 +9,8 @@ package com.twilio.twiml.fax;
 
 import com.twilio.http.HttpMethod;
 import com.twilio.twiml.GenericNode;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.net.URI;
 
@@ -22,7 +22,7 @@ public class ReceiveTest {
     public void testEmptyElement() {
         Receive elem = new Receive.Builder().build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Receive/>",
             elem.toXml()
@@ -33,7 +33,7 @@ public class ReceiveTest {
     public void testEmptyElementUrl() {
         Receive elem = new Receive.Builder().build();
 
-        Assert.assertEquals("%3C%3Fxml+version%3D%221.0%22+encoding%3D%22UTF-8%22%3F%3E%3CReceive%2F%3E", elem.toUrl());
+        Assertions.assertEquals("%3C%3Fxml+version%3D%221.0%22+encoding%3D%22UTF-8%22%3F%3E%3CReceive%2F%3E", elem.toUrl());
     }
 
     @Test
@@ -46,7 +46,7 @@ public class ReceiveTest {
             .storeMedia(true)
             .build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Receive action=\"https://example.com\" mediaType=\"application/pdf\" method=\"GET\" pageSize=\"letter\" storeMedia=\"true\"/>",
             elem.toXml()
@@ -57,7 +57,7 @@ public class ReceiveTest {
     public void testElementWithExtraAttributes() {
         Receive elem = new Receive.Builder().option("foo", "bar").option("a", "b").build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Receive a=\"b\" foo=\"bar\"/>",
             elem.toXml()
@@ -72,7 +72,7 @@ public class ReceiveTest {
 
         Receive elem = builder.build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Receive>" +
             "Hey no tags!" +
@@ -92,7 +92,7 @@ public class ReceiveTest {
         builder.addChild(child.build());
         builder.addText("after");
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Receive>" +
             "before" +
@@ -112,7 +112,7 @@ public class ReceiveTest {
         Receive.Builder builder = new Receive.Builder();
         Receive elem = builder.addChild(node).build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<Receive>" +
             "<genericTag>" +
@@ -133,7 +133,7 @@ public class ReceiveTest {
             .storeMedia(true)
             .build();
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             Receive.Builder.fromXml("<Receive action=\"https://example.com\" mediaType=\"application/pdf\" method=\"GET\" pageSize=\"letter\" storeMedia=\"true\"/>").build().toXml(),
             elem.toXml()
         );

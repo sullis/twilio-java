@@ -9,19 +9,15 @@ import com.twilio.http.Request;
 import com.twilio.http.Response;
 import com.twilio.http.TwilioRestClient;
 
-import org.junit.Test;
-
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import mockit.Mocked;
 import mockit.NonStrictExpectations;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TwilioTest {
 
@@ -42,26 +38,32 @@ public class TwilioTest {
         assertNotNull(Twilio.getExecutorService());
     }
 
-    @Test(expected = AuthenticationException.class)
+    @Test
     public void testGetRestClientNullAccountSid() {
-        Twilio.setRestClient(null);
-        Twilio.setUsername(null);
-        Twilio.setPassword(null);
+        assertThrows(AuthenticationException.class, () -> {
+            Twilio.setRestClient(null);
+            Twilio.setUsername(null);
+            Twilio.setPassword(null);
 
-        Twilio.getRestClient();
-        fail("AuthenticationException was expected");
+            Twilio.getRestClient();
+            fail("AuthenticationException was expected");
+        });
     }
 
-    @Test(expected = AuthenticationException.class)
+    @Test
     public void testSetAccountSidNull() {
-        Twilio.setUsername(null);
-        fail("AuthenticationException was expected");
+        assertThrows(AuthenticationException.class, () -> {
+            Twilio.setUsername(null);
+            fail("AuthenticationException was expected");
+        });
     }
 
-    @Test(expected = AuthenticationException.class)
+    @Test
     public void testSetAuthTokenNull() {
-        Twilio.setPassword(null);
-        fail("AuthenticationException was expected");
+        assertThrows(AuthenticationException.class, () -> {
+            Twilio.setPassword(null);
+            fail("AuthenticationException was expected");
+        });
     }
 
     @Test

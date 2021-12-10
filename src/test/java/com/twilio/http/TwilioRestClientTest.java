@@ -5,16 +5,16 @@ import com.twilio.rest.Domains;
 import com.twilio.rest.api.v2010.account.Message;
 import mockit.Expectations;
 import mockit.Mocked;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class TwilioRestClientTest {
     @Mocked
     private TwilioRestClient twilioRestClient;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         Twilio.init("AC123", "AUTH TOKEN");
     }

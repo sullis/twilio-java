@@ -1,8 +1,8 @@
 package com.twilio.jwt.taskrouter;
 
 import com.twilio.http.HttpMethod;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
@@ -42,7 +42,7 @@ public class PolicyUtilsTest {
                 .build();
 
         List<Policy> policies = Arrays.asList(activities, tasks, reservations, workerFetch);
-        Assert.assertEquals(
+        Assertions.assertEquals(
             policies,
             PolicyUtils.defaultWorkerPolicies(workspaceSid, workerSid)
         );
@@ -58,7 +58,7 @@ public class PolicyUtilsTest {
         Policy post = new Policy.Builder().url(url).method(HttpMethod.POST).allowed(true).build();
         List<Policy> policies = Arrays.asList(get, post);
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
             policies,
             PolicyUtils.defaultEventBridgePolicies(accountSid, channelId)
         );
